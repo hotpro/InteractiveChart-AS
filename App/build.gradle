@@ -1,39 +1,29 @@
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:0.6.+'
-    }
-}
-apply plugin: 'android'
-
+apply plugin: 'com.android.application'
 repositories {
     mavenCentral()
 }
-
-dependencies {
-    compile files (
-    "libs/android-support-v4.jar",
-    )
-}
 android {
-    compileSdkVersion 19
-    buildToolsVersion "19.0.0"
+    compileSdkVersion 23
+    buildToolsVersion "23.0.1"
 
     defaultConfig {
-        minSdkVersion 7
-        targetSdkVersion 19
+        applicationId "com.example.android.interactivechart"
+        minSdkVersion 16
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
     }
     buildTypes {
         release {
-            runProguard false
-            proguardFile getDefaultProguardFile('proguard-android.txt')
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "boolean", "DEV", "false"
+        }
+        debug {
+            buildConfigField "boolean", "DEV", "true"
         }
     }
-    productFlavors {
-        defaultFlavor {
-            proguardFile 'proguard-rules.txt'
-        }
-    }
+}
+dependencies {
+    compile 'com.android.support:support-v4:23.1.1'
 }
